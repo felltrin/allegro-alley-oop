@@ -5,7 +5,7 @@ This project is a continuaton of lob decresendo
 ## TODO
 
 - [x] Make it deploy (vercel)
-- [ ] Header
+- [x] Header
 - [ ] Sidebar
 - [ ] Main content area
 - [ ] Overview
