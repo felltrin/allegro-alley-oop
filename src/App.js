@@ -7,8 +7,9 @@ function App() {
   return (
     <Provider>
       <Theme appearance="light">
-        <Container bg={"#fff"} maxW={"full"} py={6} px={6}>
+        <Container bg={"#fff"} maxW={"full"} py={6} px={6} minH={"100vh"}>
           <Header />
+          <Container bg={"gray.200"} pl={4} minH={"90vh"}></Container>
         </Container>
       </Theme>
     </Provider>
