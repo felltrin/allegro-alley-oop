@@ -17,13 +17,13 @@ const Header = () => {
         justifyContent={"space-between"}
         minW={"155vh"}
       >
-        <Flex>
+        <Flex pl={14}>
           <Icon size={"md"}>
             <LuAlignLeft />
           </Icon>
         </Flex>
 
-        <Flex alignItems={"center"} gap={4}>
+        <Flex alignItems={"center"} gap={4} pr={16}>
           <Icon size={"md"}>
             <HiMagnifyingGlass />
           </Icon>
