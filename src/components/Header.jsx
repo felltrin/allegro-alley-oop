@@ -23,7 +23,7 @@ const Header = () => {
           </Icon>
         </Flex>
 
-        <Flex alignItems={"center"} gap={4} pr={16}>
+        <Flex alignItems={"center"} gap={4}>
           <Icon size={"md"}>
             <HiMagnifyingGlass />
           </Icon>
@@ -35,17 +35,19 @@ const Header = () => {
           <Text textStyle={"2xl"} color={"gray.200"}>
             |
           </Text>
-          <Image
-            src="/circle-hs-one.jpg"
-            alt="dash hs two"
-            boxSize={"50px"}
-            borderRadius={"full"}
-            fit={"cover"}
-          />
-          <Text>Thresea Webb</Text>
-          <Icon>
-            <BiChevronDown />
-          </Icon>
+          <Flex alignItems={"center"} gap={2}>
+            <Image
+              src="/circle-hs-one.jpg"
+              alt="dash hs two"
+              boxSize={"50px"}
+              borderRadius={"full"}
+              fit={"cover"}
+            />
+            <Text>Thresea Webb</Text>
+            <Icon>
+              <BiChevronDown />
+            </Icon>
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
