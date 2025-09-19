@@ -63,7 +63,7 @@ const Sidebar = () => {
             Mail
           </Flex>
           <Box
-            bg={"tomato"}
+            bg={"red.500"}
             rounded={"md"}
             w={"18px"}
             h={"18px"}
