@@ -11,7 +11,7 @@ function App() {
           <Header />
         </Container>
         <Flex>
-          <Container bg={"#fff"} minH={"95vh"} maxW={"20vh"}></Container>
+          <Container bg={"#fff"} minH={"95vh"} maxW={"24vh"}></Container>
           <Container
             bg={"gray.200"}
             pl={8}
