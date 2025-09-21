@@ -12,6 +12,7 @@ import {
   Text,
   Theme,
   Table,
+  Image,
 } from "@chakra-ui/react";
 // import Demo from "./components/Demo";
 import Header from "./components/Header";
@@ -85,6 +86,9 @@ function App() {
       { id: 2, name: "Last week", value: 1000, color: "#B6EB8E" },
     ],
   });
+
+  const nums = [1, 2, 3, 4];
+  const numOfSeries = [1, 2, 3];
 
   return (
     <Theme appearance="light">
@@ -524,9 +528,130 @@ function App() {
                 minW={"4xl"}
               >
                 <Card.Body gap="2">
-                  <Card.Title mb="2" textStyle={"2xl"} pt={2}>
-                    My Cards
-                  </Card.Title>
+                  <Flex alignItems={"center"} justifyContent={"space-between"}>
+                    <Card.Title mb="2" textStyle={"2xl"} pt={2}>
+                      My Cards
+                    </Card.Title>
+                    <Menu.Root>
+                      <Menu.Trigger asChild>
+                        <Button
+                          variant="outline"
+                          color={"black"}
+                          _hover={{ color: "white" }}
+                          rounded={"xl"}
+                          borderColor={"gray.200"}
+                        >
+                          <Image
+                            src="/mastercard-logo.png"
+                            width={10}
+                            height={8}
+                          />
+                          5880 **** **** 8854
+                          <Icon size={"xs"} color={"gray.400"}>
+                            <BiChevronDown />
+                          </Icon>
+                        </Button>
+                      </Menu.Trigger>
+                      <Portal>
+                        <Menu.Positioner>
+                          <Menu.Content>
+                            <Menu.Item value="new-txt-a">
+                              New Text File{" "}
+                              <Menu.ItemCommand>⌘E</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="new-file-a">
+                              New File...{" "}
+                              <Menu.ItemCommand>⌘N</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="new-win-a">
+                              New Window <Menu.ItemCommand>⌘W</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="open-file-a">
+                              Open File...{" "}
+                              <Menu.ItemCommand>⌘O</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="export-a">
+                              Export <Menu.ItemCommand>⌘S</Menu.ItemCommand>
+                            </Menu.Item>
+                          </Menu.Content>
+                        </Menu.Positioner>
+                      </Portal>
+                    </Menu.Root>
+                  </Flex>
+                  <Flex>
+                    {/* <Demo /> */}
+                    <Card.Root
+                      position={"relative"}
+                      overflow={"hidden"}
+                      bg={"#328299"}
+                      minW={"xs"}
+                      border={"none"}
+                    >
+                      <FaCircle
+                        style={{
+                          position: "absolute",
+                          transform: "translate(55%, 10%)",
+                        }}
+                        size={384}
+                        color="#B6EB8E"
+                        fill="#B6EB9E"
+                      />
+                      <Stack position={"relative"}>
+                        <Card.Header>
+                          <Flex
+                            alignItems={"baseline"}
+                            justifyContent={"space-between"}
+                          >
+                            <Stack gap={-1}>
+                              <Theme bg={"#328299"}>
+                                <Text>Current balance</Text>
+                                <Text textStyle={"4xl"} fontWeight={"semibold"}>
+                                  70,700.00
+                                </Text>
+                              </Theme>
+                            </Stack>
+                            <Image
+                              src="/Visa_Logo.png"
+                              alt="visa logo"
+                              htmlHeight={"25px"}
+                              htmlWidth={"75px"}
+                            />
+                          </Flex>
+                        </Card.Header>
+                        <Card.Body></Card.Body>
+                        <Card.Footer>
+                          <Theme bg={"transparent"}>
+                            <Stack minW={"xs"}>
+                              <Text>Abdur Rahman</Text>
+                              <Flex
+                                gap={18}
+                                alignItems={"center"}
+                                justifyContent={"space-between"}
+                              >
+                                <Flex gap={4} alignItems={"center"}>
+                                  {numOfSeries.map(() => (
+                                    <Flex gap={0.5}>
+                                      {nums.map(() => (
+                                        <FaCircle
+                                          size={3}
+                                          color={"white"}
+                                          fill="white"
+                                        />
+                                      ))}
+                                    </Flex>
+                                  ))}
+                                  <Text>87276</Text>
+                                </Flex>
+                                <Flex>
+                                  <Text>12/19</Text>
+                                </Flex>
+                              </Flex>
+                            </Stack>
+                          </Theme>
+                        </Card.Footer>
+                      </Stack>
+                    </Card.Root>
+                  </Flex>
                 </Card.Body>
                 <Card.Footer justifyContent="flex-end">
                   <Button variant="outline">Pay Debt</Button>
@@ -665,7 +790,6 @@ function App() {
           </Flex>
         </Container>
       </Flex>
-      {/* <Demo /> */}
     </Theme>
   );
 }
