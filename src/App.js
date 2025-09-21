@@ -18,7 +18,12 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { GoDownload } from "react-icons/go";
 import { BiChevronDown, BiUser } from "react-icons/bi";
-import { FaDollarSign, FaEllipsis, FaRegCalendarDays } from "react-icons/fa6";
+import {
+  FaCircle,
+  FaDollarSign,
+  FaEllipsis,
+  FaRegCalendarDays,
+} from "react-icons/fa6";
 import { LuChartColumnBig } from "react-icons/lu";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { Chart, useChart } from "@chakra-ui/charts";
@@ -39,7 +44,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { CiCircleAlert } from "react-icons/ci";
 
 function App() {
   const statisticsChart = useChart({
@@ -263,7 +267,7 @@ function App() {
               </Card.Body>
             </Card.Root>
           </Flex>
-          <Flex justifyContent={"space-between"} alignItems={"center"}>
+          <Flex justifyContent={"space-between"} alignItems={"center"} pb={8}>
             <Flex>
               <Card.Root
                 bg={"#ffffff"}
@@ -582,11 +586,7 @@ function App() {
                         <Table.Row key={item.id}>
                           <Table.Cell color={"gray.400"}>
                             <Flex alignItems={"center"} gap={1}>
-                              <CiCircleAlert
-                                size={12}
-                                color={"teal"}
-                                fill="teal"
-                              />
+                              <FaCircle size={12} color={"teal"} fill="teal" />
                               {item.name}
                             </Flex>
                           </Table.Cell>
@@ -607,7 +607,7 @@ function App() {
                         <Table.Row key={item.id}>
                           <Table.Cell color={"gray.400"}>
                             <Flex alignItems={"center"} gap={1}>
-                              <CiCircleAlert
+                              <FaCircle
                                 size={12}
                                 color={"#B6EB8E"}
                                 fill="#B6EB8E"
