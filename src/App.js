@@ -32,7 +32,7 @@ import {
 } from "recharts";
 
 function App() {
-  const chart = useChart({
+  const statisticsChart = useChart({
     data: [
       { sales: 175, expenses: 123, profit: 30, type: "Mon" },
       { sales: 175, expenses: 73, profit: 80, type: "Tue" },
@@ -284,8 +284,8 @@ function App() {
               </Flex>
             </Card.Header>
             <Card.Body pl={0}>
-              <Chart.Root maxH="xs" chart={chart}>
-                <BarChart data={chart.data} barSize={15}>
+              <Chart.Root maxH="xs" chart={statisticsChart}>
+                <BarChart data={statisticsChart.data} barSize={15}>
                   <CartesianGrid
                     stroke={"black"}
                     vertical={false}
@@ -294,7 +294,7 @@ function App() {
                   <XAxis
                     axisLine={false}
                     tickLine={false}
-                    dataKey={chart.key("type")}
+                    dataKey={statisticsChart.key("type")}
                     tick={{ dy: 10 }}
                   />
                   <YAxis
@@ -309,21 +309,21 @@ function App() {
                     content={<Chart.Tooltip />}
                   />
                   <Legend content={<Chart.Legend />} align="right" />
-                  {chart.series.map((item, index) =>
-                    index !== chart.series.length - 1 ? (
+                  {statisticsChart.series.map((item, index) =>
+                    index !== statisticsChart.series.length - 1 ? (
                       <Bar
                         key={item.name}
                         isAnimationActive={false}
-                        dataKey={chart.key(item.name)}
-                        fill={chart.color(item.color)}
+                        dataKey={statisticsChart.key(item.name)}
+                        fill={statisticsChart.color(item.color)}
                         stackId={item.stackId}
                       />
                     ) : (
                       <Bar
                         key={item.name}
                         isAnimationActive={false}
-                        dataKey={chart.key(item.name)}
-                        fill={chart.color(item.color)}
+                        dataKey={statisticsChart.key(item.name)}
+                        fill={statisticsChart.color(item.color)}
                         radius={[10, 10, 0, 0]}
                         stackId={item.stackId}
                       />
