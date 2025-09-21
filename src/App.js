@@ -17,15 +17,19 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { GoDownload } from "react-icons/go";
 import { BiChevronDown, BiUser } from "react-icons/bi";
-import { FaCalendarDays, FaDollarSign } from "react-icons/fa6";
+import { FaDollarSign, FaRegCalendarDays } from "react-icons/fa6";
 import { LuChartColumnBig } from "react-icons/lu";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { Chart, useChart } from "@chakra-ui/charts";
 import {
+  Area,
+  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
   Legend,
+  Line,
+  ReferenceLine,
   Tooltip,
   XAxis,
   YAxis,
@@ -46,6 +50,22 @@ function App() {
       { name: "sales", color: "#328299", stackId: "a" },
       { name: "profit", color: "#EAE3C9", stackId: "a" },
       { name: "expenses", color: "#B8EB9E", stackId: "a" },
+    ],
+  });
+
+  const chart = useChart({
+    data: [
+      { revenue: 0, expenses: 0, month: "Mon" },
+      { revenue: 15, expenses: 5, month: "Tue" },
+      { revenue: 27, expenses: 15, month: "Wed" },
+      { revenue: 88, expenses: 30, month: "Thur" },
+      { revenue: 25, expenses: 62, month: "Fri" },
+      { revenue: 90, expenses: 25, month: "Sat" },
+      { revenue: 90, expenses: 6, month: "Sun" },
+    ],
+    series: [
+      { name: "revenue", color: "#328299" },
+      { name: "expenses", color: "#B8EB9E" },
     ],
   });
 
@@ -115,7 +135,7 @@ function App() {
               </Menu.Root>
             </Flex>
           </Flex>
-          <Flex justifyContent={"space-between"}>
+          <Flex justifyContent={"space-between"} pb={8}>
             <Card.Root
               border={"1px solid"}
               borderColor={"gray.200"}
@@ -230,109 +250,249 @@ function App() {
               </Card.Body>
             </Card.Root>
           </Flex>
-          <Card.Root
-            bg={"#ffffff"}
-            rounded={"md"}
-            m={6}
-            variant={"subtle"}
-            border={"2px solid"}
-            borderColor={"gray.200"}
-          >
-            <Card.Header>
-              <Flex alignItems={"center"} justifyContent={"space-between"}>
-                <Card.Title fontWeight={"semibold"} color={"black"}>
-                  Statistics
-                </Card.Title>
-                <Menu.Root>
-                  <Menu.Trigger asChild>
-                    <Button
-                      variant="outline"
-                      color={"black"}
-                      _hover={{ color: "white" }}
-                      rounded={"xl"}
-                      borderColor={"gray.200"}
+          <Flex justifyContent={"space-between"} alignItems={"center"}>
+            <Flex>
+              <Card.Root
+                bg={"#ffffff"}
+                rounded={"md"}
+                variant={"subtle"}
+                border={"2px solid"}
+                borderColor={"gray.200"}
+                minW={"75vh"}
+              >
+                <Card.Header>
+                  <Flex alignItems={"center"} justifyContent={"space-between"}>
+                    <Card.Title fontWeight={"semibold"} color={"black"}>
+                      Statistics
+                    </Card.Title>
+                    <Menu.Root>
+                      <Menu.Trigger asChild>
+                        <Button
+                          variant="outline"
+                          color={"black"}
+                          _hover={{ color: "white" }}
+                          rounded={"xl"}
+                          borderColor={"gray.200"}
+                        >
+                          <FaRegCalendarDays />
+                          19 Aug - 25 Aug
+                          <Icon size={"xs"} color={"gray.400"}>
+                            <BiChevronDown />
+                          </Icon>
+                        </Button>
+                      </Menu.Trigger>
+                      <Portal>
+                        <Menu.Positioner>
+                          <Menu.Content>
+                            <Menu.Item value="new-txt-a">
+                              New Text File{" "}
+                              <Menu.ItemCommand>⌘E</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="new-file-a">
+                              New File...{" "}
+                              <Menu.ItemCommand>⌘N</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="new-win-a">
+                              New Window <Menu.ItemCommand>⌘W</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="open-file-a">
+                              Open File...{" "}
+                              <Menu.ItemCommand>⌘O</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="export-a">
+                              Export <Menu.ItemCommand>⌘S</Menu.ItemCommand>
+                            </Menu.Item>
+                          </Menu.Content>
+                        </Menu.Positioner>
+                      </Portal>
+                    </Menu.Root>
+                  </Flex>
+                </Card.Header>
+                <Card.Body pl={0}>
+                  <Chart.Root maxH="xs" chart={statisticsChart}>
+                    <BarChart data={statisticsChart.data} barSize={15}>
+                      <CartesianGrid
+                        stroke={"black"}
+                        vertical={false}
+                        opacity={0.1}
+                      />
+                      <XAxis
+                        axisLine={false}
+                        tickLine={false}
+                        dataKey={statisticsChart.key("type")}
+                        tick={{ dy: 10 }}
+                      />
+                      <YAxis
+                        axisLine={false}
+                        tickLine={false}
+                        domain={[0, 400]}
+                        tickFormatter={(value) => `${value}`}
+                      />
+                      <Tooltip
+                        cursor={{ fill: "none" }}
+                        animationDuration={100}
+                        content={<Chart.Tooltip />}
+                      />
+                      <Legend content={<Chart.Legend />} align="right" />
+                      {statisticsChart.series.map((item, index) =>
+                        index !== statisticsChart.series.length - 1 ? (
+                          <Bar
+                            key={item.name}
+                            isAnimationActive={false}
+                            dataKey={statisticsChart.key(item.name)}
+                            fill={statisticsChart.color(item.color)}
+                            stackId={item.stackId}
+                          />
+                        ) : (
+                          <Bar
+                            key={item.name}
+                            isAnimationActive={false}
+                            dataKey={statisticsChart.key(item.name)}
+                            fill={statisticsChart.color(item.color)}
+                            radius={[10, 10, 0, 0]}
+                            stackId={item.stackId}
+                          />
+                        )
+                      )}
+                    </BarChart>
+                  </Chart.Root>
+                </Card.Body>
+              </Card.Root>
+            </Flex>
+
+            <Flex>
+              <Card.Root
+                bg={"white"}
+                rounded={"md"}
+                variant={"subtle"}
+                border={"2px solid"}
+                borderColor={"gray.200"}
+                minW={"65vh"}
+              >
+                <Card.Header>
+                  <Flex alignItems={"center"} justifyContent={"space-between"}>
+                    <Card.Title color={"black"} fontWeight={"semibold"}>
+                      Analytics
+                    </Card.Title>
+                    <Menu.Root>
+                      <Menu.Trigger asChild>
+                        <Button
+                          variant="outline"
+                          color={"black"}
+                          _hover={{ color: "white" }}
+                          rounded={"xl"}
+                          borderColor={"gray.200"}
+                        >
+                          <FaRegCalendarDays />
+                          19 Aug - 25 Aug
+                          <Icon>
+                            <BiChevronDown />
+                          </Icon>
+                        </Button>
+                      </Menu.Trigger>
+                      <Portal>
+                        <Menu.Positioner>
+                          <Menu.Content>
+                            <Menu.Item value="new-txt-a">
+                              New Text File{" "}
+                              <Menu.ItemCommand>⌘E</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="new-file-a">
+                              New File...{" "}
+                              <Menu.ItemCommand>⌘N</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="new-win-a">
+                              New Window <Menu.ItemCommand>⌘W</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="open-file-a">
+                              Open File...{" "}
+                              <Menu.ItemCommand>⌘O</Menu.ItemCommand>
+                            </Menu.Item>
+                            <Menu.Item value="export-a">
+                              Export <Menu.ItemCommand>⌘S</Menu.ItemCommand>
+                            </Menu.Item>
+                          </Menu.Content>
+                        </Menu.Positioner>
+                      </Portal>
+                    </Menu.Root>
+                  </Flex>
+                </Card.Header>
+                <Card.Body>
+                  <Flex gap={12} mb={4}>
+                    <Flex alignItems={"center"} gap={3}>
+                      <IconButton
+                        bg={"#d5e7ec71"}
+                        pointerEvents={"none"}
+                        rounded={"xl"}
+                      >
+                        <BsArrowUp color="#328299" />
+                      </IconButton>
+                      <Text color={"black"} textStyle={"lg"}>
+                        $5.890
+                      </Text>
+                    </Flex>
+                    <Flex alignItems={"center"} gap={3}>
+                      <IconButton
+                        bg={"#ecf3e79c"}
+                        pointerEvents={"none"}
+                        rounded={"xl"}
+                      >
+                        <BsArrowDown color="#b6eb8e" />
+                      </IconButton>
+                      <Text color={"black"} textStyle={"lg"}>
+                        $1.750
+                      </Text>
+                    </Flex>
+                  </Flex>
+                  <Chart.Root maxH={"xs"} h={"265px"} chart={chart}>
+                    <AreaChart
+                      data={chart.data}
+                      margin={{ left: 15, right: 15 }}
+                      height={"100px"}
                     >
-                      <FaCalendarDays />
-                      19 Aug - 25 Aug
-                      <Icon size={"xs"} color={"gray.400"}>
-                        <BiChevronDown />
-                      </Icon>
-                    </Button>
-                  </Menu.Trigger>
-                  <Portal>
-                    <Menu.Positioner>
-                      <Menu.Content>
-                        <Menu.Item value="new-txt-a">
-                          New Text File <Menu.ItemCommand>⌘E</Menu.ItemCommand>
-                        </Menu.Item>
-                        <Menu.Item value="new-file-a">
-                          New File... <Menu.ItemCommand>⌘N</Menu.ItemCommand>
-                        </Menu.Item>
-                        <Menu.Item value="new-win-a">
-                          New Window <Menu.ItemCommand>⌘W</Menu.ItemCommand>
-                        </Menu.Item>
-                        <Menu.Item value="open-file-a">
-                          Open File... <Menu.ItemCommand>⌘O</Menu.ItemCommand>
-                        </Menu.Item>
-                        <Menu.Item value="export-a">
-                          Export <Menu.ItemCommand>⌘S</Menu.ItemCommand>
-                        </Menu.Item>
-                      </Menu.Content>
-                    </Menu.Positioner>
-                  </Portal>
-                </Menu.Root>
-              </Flex>
-            </Card.Header>
-            <Card.Body pl={0}>
-              <Chart.Root maxH="xs" chart={statisticsChart}>
-                <BarChart data={statisticsChart.data} barSize={15}>
-                  <CartesianGrid
-                    stroke={"black"}
-                    vertical={false}
-                    opacity={0.1}
-                  />
-                  <XAxis
-                    axisLine={false}
-                    tickLine={false}
-                    dataKey={statisticsChart.key("type")}
-                    tick={{ dy: 10 }}
-                  />
-                  <YAxis
-                    axisLine={false}
-                    tickLine={false}
-                    domain={[0, 400]}
-                    tickFormatter={(value) => `${value}`}
-                  />
-                  <Tooltip
-                    cursor={{ fill: "none" }}
-                    animationDuration={100}
-                    content={<Chart.Tooltip />}
-                  />
-                  <Legend content={<Chart.Legend />} align="right" />
-                  {statisticsChart.series.map((item, index) =>
-                    index !== statisticsChart.series.length - 1 ? (
-                      <Bar
-                        key={item.name}
-                        isAnimationActive={false}
-                        dataKey={statisticsChart.key(item.name)}
-                        fill={statisticsChart.color(item.color)}
-                        stackId={item.stackId}
+                      <CartesianGrid
+                        stroke={chart.color("#e4e8edff")}
+                        horizontal={false}
                       />
-                    ) : (
-                      <Bar
-                        key={item.name}
-                        isAnimationActive={false}
-                        dataKey={statisticsChart.key(item.name)}
-                        fill={statisticsChart.color(item.color)}
-                        radius={[10, 10, 0, 0]}
-                        stackId={item.stackId}
+                      <XAxis
+                        axisLine={false}
+                        dataKey={chart.key("month")}
+                        tickLine={false}
+                        stroke={chart.color("#e4e8edff")}
                       />
-                    )
-                  )}
-                </BarChart>
-              </Chart.Root>
-            </Card.Body>
-          </Card.Root>
+                      <ReferenceLine y={0} stroke={chart.color("#e4e8edff")} />
+                      <Tooltip
+                        animationDuration={100}
+                        cursor={false}
+                        content={<Chart.Tooltip />}
+                      />
+                      {chart.series.map((item) => (
+                        <>
+                          <Area
+                            type={"linear"}
+                            dataKey={chart.key(item.name)}
+                            stroke="none"
+                            fill={chart.color(item.color)}
+                            color="black"
+                            opacity={"0.2"}
+                          />
+                          <Line
+                            key={item.name}
+                            isAnimationActive={false}
+                            dataKey={chart.key(item.name)}
+                            stroke={chart.color(item.color)}
+                            strokeWidth={2}
+                            fill={chart.color("white")}
+                            opacity={chart.getSeriesOpacity(item.name)}
+                          />
+                        </>
+                      ))}
+                    </AreaChart>
+                  </Chart.Root>
+                </Card.Body>
+              </Card.Root>
+            </Flex>
+          </Flex>
         </Container>
       </Flex>
       {/* <Demo /> */}
