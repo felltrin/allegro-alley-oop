@@ -513,122 +513,155 @@ function App() {
               </Card.Root>
             </Flex>
           </Flex>
-          <Flex>
-            <Card.Root
-              bg={"#fff"}
-              variant={"subtle"}
-              border={"2px solid"}
-              borderColor={"gray.100"}
-              rounded={"xl"}
-              minW={"sm"}
-              minH={"md"}
-            >
-              <Card.Header>
-                <Flex alignItems={"center"} justifyContent={"space-between"}>
-                  <Card.Title color={"black"} fontWeight={"semibold"}>
-                    Sales
+          <Flex justifyContent={"space-between"}>
+            <Flex>
+              <Card.Root
+                width="320px"
+                variant={"subtle"}
+                key={"subtle"}
+                bg={"#fff"}
+                rounded={"xl"}
+                minW={"4xl"}
+              >
+                <Card.Body gap="2">
+                  <Card.Title mb="2" textStyle={"2xl"} pt={2}>
+                    My Cards
                   </Card.Title>
-                  <IconButton
-                    bg={"#fff"}
-                    color={"gray.400"}
-                    _hover={{ bg: "#000", color: "white" }}
-                  >
-                    <FaEllipsis />
-                  </IconButton>
-                </Flex>
-              </Card.Header>
-              <Card.Body>
-                <Theme appearance="light" bg={"#fff"}>
-                  <Chart.Root boxSize={"200px"} chart={chart} mx={"auto"}>
-                    <PieChart>
-                      <Tooltip
-                        cursor={false}
-                        animationDuration={100}
-                        content={<Chart.Tooltip />}
-                      />
-                      <Pie
-                        innerRadius={80}
-                        outerRadius={100}
-                        isAnimationActive={false}
-                        data={chart.data}
-                        dataKey={chart.key("value")}
-                        nameKey="name"
-                      >
-                        <Label
-                          content={({ viewBox }) => (
-                            <Chart.RadialText
-                              viewBox={viewBox}
-                              title={chart.getTotal("value").toLocaleString()}
-                              description="Total"
-                            />
-                          )}
+                </Card.Body>
+                <Card.Footer justifyContent="flex-end">
+                  <Button variant="outline">Pay Debt</Button>
+                  <Button>Cancel</Button>
+                </Card.Footer>
+              </Card.Root>
+            </Flex>
+
+            <Flex>
+              <Card.Root
+                bg={"#fff"}
+                variant={"subtle"}
+                border={"2px solid"}
+                borderColor={"gray.100"}
+                rounded={"xl"}
+                minW={"sm"}
+                minH={"md"}
+              >
+                <Card.Header>
+                  <Flex alignItems={"center"} justifyContent={"space-between"}>
+                    <Card.Title color={"black"} fontWeight={"semibold"}>
+                      Sales
+                    </Card.Title>
+                    <IconButton
+                      bg={"#fff"}
+                      color={"gray.400"}
+                      _hover={{ bg: "#000", color: "white" }}
+                    >
+                      <FaEllipsis />
+                    </IconButton>
+                  </Flex>
+                </Card.Header>
+                <Card.Body>
+                  <Theme appearance="light" bg={"#fff"}>
+                    <Chart.Root boxSize={"200px"} chart={chart} mx={"auto"}>
+                      <PieChart>
+                        <Tooltip
+                          cursor={false}
+                          animationDuration={100}
+                          content={<Chart.Tooltip />}
                         />
-                        {chart.data.map((item) => {
-                          return (
-                            <Cell
-                              key={item.name}
-                              fill={chart.color(item.color)}
-                            />
-                          );
-                        })}
-                        <Cell />
-                      </Pie>
-                    </PieChart>
-                  </Chart.Root>
-                </Theme>
-              </Card.Body>
-              <Card.Footer>
-                <Table.Root variant={"simple"} color={"black"}>
-                  <Table.Caption />
-                  <Table.Body>
-                    {chart.data.map((item) =>
-                      item.name === "Current week" ? (
-                        <Table.Row key={item.id}>
-                          <Table.Cell color={"gray.400"}>
-                            <Flex alignItems={"center"} gap={1}>
-                              <FaCircle size={12} color={"teal"} fill="teal" />
-                              {item.name}
-                            </Flex>
-                          </Table.Cell>
-                          <Table.Cell>{item.value}</Table.Cell>
-                          <Table.Cell
-                            textAlign="end"
-                            alignItems={"center"}
-                            justifyContent={"center"}
-                            color={"#B6EB8E"}
-                          >
-                            <Flex alignItems={"center"} justifyContent={"end"}>
-                              <BsArrowUp size={12} />
-                              <Text fontWeight={"semibold"}>8.6%</Text>
-                            </Flex>
-                          </Table.Cell>
-                        </Table.Row>
-                      ) : (
-                        <Table.Row key={item.id}>
-                          <Table.Cell color={"gray.400"}>
-                            <Flex alignItems={"center"} gap={1}>
-                              <FaCircle
-                                size={12}
-                                color={"#B6EB8E"}
-                                fill="#B6EB8E"
+                        <Pie
+                          innerRadius={80}
+                          outerRadius={100}
+                          isAnimationActive={false}
+                          data={chart.data}
+                          dataKey={chart.key("value")}
+                          nameKey="name"
+                        >
+                          <Label
+                            content={({ viewBox }) => (
+                              <Chart.RadialText
+                                viewBox={viewBox}
+                                title={chart.getTotal("value").toLocaleString()}
+                                description="Total"
                               />
-                              {item.name}
-                            </Flex>
-                          </Table.Cell>
-                          <Table.Cell>{item.value}</Table.Cell>
-                          <Table.Cell color={"red.300"}>
-                            <Flex alignItems={"center"} justifyContent={"end"}>
-                              <BsArrowDown size={12} />
-                              <Text fontWeight={"semibold"}>5.8%</Text>
-                            </Flex>
-                          </Table.Cell>
-                        </Table.Row>
-                      )
-                    )}
-                  </Table.Body>
-                </Table.Root>
-              </Card.Footer>
-            </Card.Root>
+                            )}
+                          />
+                          {chart.data.map((item) => {
+                            return (
+                              <Cell
+                                key={item.name}
+                                fill={chart.color(item.color)}
+                              />
+                            );
+                          })}
+                          <Cell />
+                        </Pie>
+                      </PieChart>
+                    </Chart.Root>
+                  </Theme>
+                </Card.Body>
+                <Card.Footer>
+                  <Table.Root variant={"simple"} color={"black"}>
+                    <Table.Caption />
+                    <Table.Body>
+                      {chart.data.map((item) =>
+                        item.name === "Current week" ? (
+                          <Table.Row key={item.id}>
+                            <Table.Cell color={"gray.400"}>
+                              <Flex alignItems={"center"} gap={1}>
+                                <FaCircle
+                                  size={12}
+                                  color={"teal"}
+                                  fill="teal"
+                                />
+                                {item.name}
+                              </Flex>
+                            </Table.Cell>
+                            <Table.Cell>{item.value}</Table.Cell>
+                            <Table.Cell
+                              textAlign="end"
+                              alignItems={"center"}
+                              justifyContent={"center"}
+                              color={"#B6EB8E"}
+                            >
+                              <Flex
+                                alignItems={"center"}
+                                justifyContent={"end"}
+                              >
+                                <BsArrowUp size={12} />
+                                <Text fontWeight={"semibold"}>8.6%</Text>
+                              </Flex>
+                            </Table.Cell>
+                          </Table.Row>
+                        ) : (
+                          <Table.Row key={item.id}>
+                            <Table.Cell color={"gray.400"}>
+                              <Flex alignItems={"center"} gap={1}>
+                                <FaCircle
+                                  size={12}
+                                  color={"#B6EB8E"}
+                                  fill="#B6EB8E"
+                                />
+                                {item.name}
+                              </Flex>
+                            </Table.Cell>
+                            <Table.Cell>{item.value}</Table.Cell>
+                            <Table.Cell color={"red.300"}>
+                              <Flex
+                                alignItems={"center"}
+                                justifyContent={"end"}
+                              >
+                                <BsArrowDown size={12} />
+                                <Text fontWeight={"semibold"}>5.8%</Text>
+                              </Flex>
+                            </Table.Cell>
+                          </Table.Row>
+                        )
+                      )}
+                    </Table.Body>
+                  </Table.Root>
+                </Card.Footer>
+              </Card.Root>
+            </Flex>
           </Flex>
         </Container>
       </Flex>
