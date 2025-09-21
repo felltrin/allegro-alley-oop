@@ -11,13 +11,14 @@ import {
   Stack,
   Text,
   Theme,
+  Table,
 } from "@chakra-ui/react";
 // import Demo from "./components/Demo";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { GoDownload } from "react-icons/go";
 import { BiChevronDown, BiUser } from "react-icons/bi";
-import { FaDollarSign, FaRegCalendarDays } from "react-icons/fa6";
+import { FaDollarSign, FaEllipsis, FaRegCalendarDays } from "react-icons/fa6";
 import { LuChartColumnBig } from "react-icons/lu";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { Chart, useChart } from "@chakra-ui/charts";
@@ -27,13 +28,18 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
+  Label,
   Legend,
   Line,
+  Pie,
+  PieChart,
   ReferenceLine,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
+import { CiCircleAlert } from "react-icons/ci";
 
 function App() {
   const statisticsChart = useChart({
@@ -53,7 +59,7 @@ function App() {
     ],
   });
 
-  const chart = useChart({
+  const analyticsChart = useChart({
     data: [
       { revenue: 0, expenses: 0, month: "Mon" },
       { revenue: 15, expenses: 5, month: "Tue" },
@@ -66,6 +72,13 @@ function App() {
     series: [
       { name: "revenue", color: "#328299" },
       { name: "expenses", color: "#B8EB9E" },
+    ],
+  });
+
+  const chart = useChart({
+    data: [
+      { id: 1, name: "Current week", value: 2500, color: "#328299" },
+      { id: 2, name: "Last week", value: 1000, color: "#B6EB8E" },
     ],
   });
 
@@ -444,46 +457,49 @@ function App() {
                       </Text>
                     </Flex>
                   </Flex>
-                  <Chart.Root maxH={"xs"} h={"265px"} chart={chart}>
+                  <Chart.Root maxH={"xs"} h={"265px"} chart={analyticsChart}>
                     <AreaChart
-                      data={chart.data}
+                      data={analyticsChart.data}
                       margin={{ left: 15, right: 15 }}
                       height={"100px"}
                     >
                       <CartesianGrid
-                        stroke={chart.color("#e4e8edff")}
+                        stroke={analyticsChart.color("#e4e8edff")}
                         horizontal={false}
                       />
                       <XAxis
                         axisLine={false}
-                        dataKey={chart.key("month")}
+                        dataKey={analyticsChart.key("month")}
                         tickLine={false}
-                        stroke={chart.color("#e4e8edff")}
+                        stroke={analyticsChart.color("#e4e8edff")}
                       />
-                      <ReferenceLine y={0} stroke={chart.color("#e4e8edff")} />
+                      <ReferenceLine
+                        y={0}
+                        stroke={analyticsChart.color("#e4e8edff")}
+                      />
                       <Tooltip
                         animationDuration={100}
                         cursor={false}
                         content={<Chart.Tooltip />}
                       />
-                      {chart.series.map((item) => (
+                      {analyticsChart.series.map((item) => (
                         <>
                           <Area
                             type={"linear"}
-                            dataKey={chart.key(item.name)}
+                            dataKey={analyticsChart.key(item.name)}
                             stroke="none"
-                            fill={chart.color(item.color)}
+                            fill={analyticsChart.color(item.color)}
                             color="black"
                             opacity={"0.2"}
                           />
                           <Line
                             key={item.name}
                             isAnimationActive={false}
-                            dataKey={chart.key(item.name)}
-                            stroke={chart.color(item.color)}
+                            dataKey={analyticsChart.key(item.name)}
+                            stroke={analyticsChart.color(item.color)}
                             strokeWidth={2}
-                            fill={chart.color("white")}
-                            opacity={chart.getSeriesOpacity(item.name)}
+                            fill={analyticsChart.color("white")}
+                            opacity={analyticsChart.getSeriesOpacity(item.name)}
                           />
                         </>
                       ))}
@@ -492,6 +508,127 @@ function App() {
                 </Card.Body>
               </Card.Root>
             </Flex>
+          </Flex>
+          <Flex>
+            <Card.Root
+              bg={"#fff"}
+              variant={"subtle"}
+              border={"2px solid"}
+              borderColor={"gray.100"}
+              rounded={"xl"}
+              minW={"sm"}
+              minH={"md"}
+            >
+              <Card.Header>
+                <Flex alignItems={"center"} justifyContent={"space-between"}>
+                  <Card.Title color={"black"} fontWeight={"semibold"}>
+                    Sales
+                  </Card.Title>
+                  <IconButton
+                    bg={"#fff"}
+                    color={"gray.400"}
+                    _hover={{ bg: "#000", color: "white" }}
+                  >
+                    <FaEllipsis />
+                  </IconButton>
+                </Flex>
+              </Card.Header>
+              <Card.Body>
+                <Theme appearance="light" bg={"#fff"}>
+                  <Chart.Root boxSize={"200px"} chart={chart} mx={"auto"}>
+                    <PieChart>
+                      <Tooltip
+                        cursor={false}
+                        animationDuration={100}
+                        content={<Chart.Tooltip />}
+                      />
+                      <Pie
+                        innerRadius={80}
+                        outerRadius={100}
+                        isAnimationActive={false}
+                        data={chart.data}
+                        dataKey={chart.key("value")}
+                        nameKey="name"
+                      >
+                        <Label
+                          content={({ viewBox }) => (
+                            <Chart.RadialText
+                              viewBox={viewBox}
+                              title={chart.getTotal("value").toLocaleString()}
+                              description="Total"
+                            />
+                          )}
+                        />
+                        {chart.data.map((item) => {
+                          return (
+                            <Cell
+                              key={item.name}
+                              fill={chart.color(item.color)}
+                            />
+                          );
+                        })}
+                        <Cell />
+                      </Pie>
+                    </PieChart>
+                  </Chart.Root>
+                </Theme>
+              </Card.Body>
+              <Card.Footer>
+                <Table.Root variant={"simple"} color={"black"}>
+                  <Table.Caption />
+                  <Table.Body>
+                    {chart.data.map((item) =>
+                      item.name === "Current week" ? (
+                        <Table.Row key={item.id}>
+                          <Table.Cell color={"gray.400"}>
+                            <Flex alignItems={"center"} gap={1}>
+                              <CiCircleAlert
+                                size={12}
+                                color={"teal"}
+                                fill="teal"
+                              />
+                              {item.name}
+                            </Flex>
+                          </Table.Cell>
+                          <Table.Cell>{item.value}</Table.Cell>
+                          <Table.Cell
+                            textAlign="end"
+                            alignItems={"center"}
+                            justifyContent={"center"}
+                            color={"#B6EB8E"}
+                          >
+                            <Flex alignItems={"center"} justifyContent={"end"}>
+                              <BsArrowUp size={12} />
+                              <Text fontWeight={"semibold"}>8.6%</Text>
+                            </Flex>
+                          </Table.Cell>
+                        </Table.Row>
+                      ) : (
+                        <Table.Row key={item.id}>
+                          <Table.Cell color={"gray.400"}>
+                            <Flex alignItems={"center"} gap={1}>
+                              <CiCircleAlert
+                                size={12}
+                                color={"#B6EB8E"}
+                                fill="#B6EB8E"
+                              />
+                              {item.name}
+                            </Flex>
+                          </Table.Cell>
+                          <Table.Cell>{item.value}</Table.Cell>
+                          <Table.Cell color={"red.300"}>
+                            <Flex alignItems={"center"} justifyContent={"end"}>
+                              <BsArrowDown size={12} />
+                              <Text fontWeight={"semibold"}>5.8%</Text>
+                            </Flex>
+                          </Table.Cell>
+                        </Table.Row>
+                      )
+                    )}
+                  </Table.Body>
+                </Table.Root>
+              </Card.Footer>
+            </Card.Root>
           </Flex>
         </Container>
       </Flex>
