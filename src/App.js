@@ -578,7 +578,7 @@ function App() {
                       </Portal>
                     </Menu.Root>
                   </Flex>
-                  <Flex>
+                  <Flex gap={16}>
                     {/* <Demo /> */}
                     <Card.Root
                       position={"relative"}
@@ -651,11 +651,34 @@ function App() {
                         </Card.Footer>
                       </Stack>
                     </Card.Root>
+                    <Flex gap={8}>
+                      <Stack color={"gray.600"}>
+                        <Text>Card Type:</Text>
+                        <Text>Card Holder:</Text>
+                        <Text>Expires:</Text>
+                        <Text>Card Number:</Text>
+                        <Text>Total Balance:</Text>
+                        <Text>Total Debt:</Text>
+                      </Stack>
+                      <Stack>
+                        <Text>Visa</Text>
+                        <Text>Thresea Webb</Text>
+                        <Text>12/19</Text>
+                        <Text>5880 5087 3288 8854</Text>
+                        <Text>80,700.00</Text>
+                        <Text>8,250.00</Text>
+                      </Stack>
+                    </Flex>
                   </Flex>
                 </Card.Body>
-                <Card.Footer justifyContent="flex-end">
-                  <Button variant="outline">Pay Debt</Button>
-                  <Button>Cancel</Button>
+                <Card.Footer justifyContent={"space-between"}>
+                  <Flex>
+                    <Button variant="outline">Pay Debt</Button>
+                  </Flex>
+                  <Flex gap={2}>
+                    <Button variant="outline">Pay Debt</Button>
+                    <Button>Cancel</Button>
+                  </Flex>
                 </Card.Footer>
               </Card.Root>
             </Flex>
