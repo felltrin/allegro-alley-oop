@@ -16,6 +16,7 @@ const Header = () => {
         alignItems={"center"}
         justifyContent={"space-between"}
         minW={"155vh"}
+        pr={6}
       >
         <Flex pl={14}>
           <Icon size={"md"}>
