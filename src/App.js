@@ -675,11 +675,12 @@ function App() {
                             <Button
                               variant="subtle"
                               minW={"full"}
-                              bg={"#c0fabe3e"}
+                              bg={"#befaf23e"}
                               rounded={"xl"}
                               color={"#328299"}
                               fontWeight={"bold"}
                               textStyle={"lg"}
+                              py={6}
                             >
                               <FaPlus />
                               Add Card
@@ -692,7 +693,7 @@ function App() {
                       <Table.Body>
                         <Table.Row textStyle={"lg"}>
                           <Table.Cell>
-                            <Flex gap={20} pb={4}>
+                            <Flex gap={20} pb={3}>
                               <Stack color={"gray.400"} gap={4}>
                                 <Text>Card Type:</Text>
                                 <Text>Card Holder:</Text>
@@ -714,9 +715,27 @@ function App() {
                         </Table.Row>
                         <Table.Row>
                           <Table.Cell pt={8}>
-                            <Flex gap={2}>
-                              <Button bg={"#328299"}>Pay Debt</Button>
-                              <Button variant="outline">Cancel</Button>
+                            <Flex gap={8}>
+                              <Button
+                                bg={"#328299"}
+                                textStyle={"lg"}
+                                px={8}
+                                rounded={"xl"}
+                                size={"xl"}
+                                // fontWeight={"semibold"}
+                              >
+                                Pay Debt
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size={"xl"}
+                                rounded={"xl"}
+                                px={8}
+                                fontWeight={"semibold"}
+                                textStyle={"lg"}
+                              >
+                                Cancel
+                              </Button>
                             </Flex>
                           </Table.Cell>
                         </Table.Row>
