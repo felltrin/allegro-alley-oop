@@ -42,6 +42,7 @@ import {
   YAxis,
 } from "recharts";
 import OverviewHeader from "./Main/OverviewHeader";
+import TotalProfitCard from "./Main/TotalProfitCard";
 
 const Main = () => {
   const statisticsChart = useChart({
@@ -98,39 +99,7 @@ const Main = () => {
     >
       <OverviewHeader />
       <Flex justifyContent={"space-between"} pb={8}>
-        <Card.Root border={"1px solid"} borderColor={"gray.200"} minW={"470px"}>
-          <Card.Body>
-            <Flex alignItems={"center"} justifyContent={"space-between"}>
-              <Stack>
-                <Text textStyle={"sm"} color={"gray.400"}>
-                  Total Profit
-                </Text>
-                <Flex alignItems={"center"} gap={2}>
-                  <Text textStyle={"3xl"} fontWeight={"semibold"}>
-                    $14.500
-                  </Text>
-                  <Flex alignItems={"center"}>
-                    <Icon size={12} color={"green.500"}>
-                      <BsArrowUp />
-                    </Icon>
-
-                    <Text fontWeight={"semibold"} color={"green.500"}>
-                      50.8%
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Stack>
-              <IconButton
-                bg={"#ecf3e79c"}
-                size={"2xl"}
-                rounded={"3xl"}
-                pointerEvents={"none"}
-              >
-                <FaDollarSign color={"#B8EB9E"} />
-              </IconButton>
-            </Flex>
-          </Card.Body>
-        </Card.Root>
+        <TotalProfitCard />
         <Card.Root border={"1px solid"} borderColor={"gray.200"} minW={"470px"}>
           <Card.Body>
             <Flex alignItems={"center"} justifyContent={"space-between"}>
