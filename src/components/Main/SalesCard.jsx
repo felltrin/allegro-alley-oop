@@ -1,13 +1,4 @@
-// import Demo from "../Demo";
-import {
-  Card,
-  //   Container,
-  Flex,
-  IconButton,
-  Text,
-  Theme,
-  Table,
-} from "@chakra-ui/react";
+import { Card, Flex, IconButton, Text, Theme, Table } from "@chakra-ui/react";
 import { FaCircle, FaEllipsis } from "react-icons/fa6";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { Chart, useChart } from "@chakra-ui/charts";

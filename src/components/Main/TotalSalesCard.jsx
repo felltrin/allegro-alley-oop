@@ -1,5 +1,4 @@
 import { Card, Flex, Icon, IconButton, Stack, Text } from "@chakra-ui/react";
-// import Demo from "../Demo";
 import { BsArrowDown } from "react-icons/bs";
 import { LuChartColumnBig } from "react-icons/lu";
 
