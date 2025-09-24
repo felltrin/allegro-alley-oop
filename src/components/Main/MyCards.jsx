@@ -1,10 +1,7 @@
-// import Demo from "../Demo";
 import {
   Button,
   Card,
-  //   Container,
   Flex,
-  //   IconButton,
   Icon,
   Menu,
   Portal,
@@ -16,9 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { BiChevronDown } from "react-icons/bi";
 import { FaCircle, FaPlus } from "react-icons/fa6";
-// import { BsArrowDown, BsArrowUp } from "react-icons/bs";
-// import { Chart, useChart } from "@chakra-ui/charts";
-// import { Cell, Label, Pie, PieChart, Tooltip } from "recharts";
 
 const MyCards = () => {
   const nums = [1, 2, 3, 4];

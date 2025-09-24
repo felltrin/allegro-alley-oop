@@ -1,5 +1,4 @@
 import { Container, Flex, Theme } from "@chakra-ui/react";
-// import Demo from "./components/Demo";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import Main from "./components/Main";
