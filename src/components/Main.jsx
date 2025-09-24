@@ -20,7 +20,6 @@ import {
   FaPlus,
   FaRegCalendarDays,
 } from "react-icons/fa6";
-import { LuChartColumnBig } from "react-icons/lu";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { Chart, useChart } from "@chakra-ui/charts";
 import {
@@ -43,6 +42,7 @@ import {
 import OverviewHeader from "./Main/OverviewHeader";
 import TotalProfitCard from "./Main/TotalProfitCard";
 import TotalSalesCard from "./Main/TotalSalesCard";
+import NewUsersCard from "./Main/NewUsersCard";
 
 const Main = () => {
   const statisticsChart = useChart({
@@ -101,40 +101,7 @@ const Main = () => {
       <Flex justifyContent={"space-between"} pb={8}>
         <TotalProfitCard />
         <TotalSalesCard />
-        <Card.Root border={"1px solid"} borderColor={"gray.200"} minW={"470px"}>
-          <Card.Body>
-            <Flex alignItems={"center"} justifyContent={"space-between"}>
-              <Stack>
-                <Text textStyle={"sm"} color={"gray.400"}>
-                  New Users
-                </Text>
-
-                <Flex alignItems={"center"} gap={2}>
-                  <Text textStyle={"3xl"} fontWeight={"semibold"}>
-                    8.300K
-                  </Text>
-                  <Flex alignItems={"center"}>
-                    <Icon size={12} color={"green.500"}>
-                      <BsArrowUp />
-                    </Icon>
-
-                    <Text fontWeight={"semibold"} color={"green.500"}>
-                      24.9%
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Stack>
-              <IconButton
-                bg={"#ecf3e79c"}
-                size={"2xl"}
-                rounded={"3xl"}
-                pointerEvents={"none"}
-              >
-                <BiUser color={"#B8EB9E"} />
-              </IconButton>
-            </Flex>
-          </Card.Body>
-        </Card.Root>
+        <NewUsersCard />
       </Flex>
       <Flex justifyContent={"space-between"} alignItems={"center"} pb={8}>
         <Flex>
